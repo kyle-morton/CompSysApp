@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using MySql.Data.MySqlClient;
+using FirstApplication.Model;
 
-namespace DAO
+namespace FirstApplication.DAO
 {
-    class UserDAO
+    class ItemDAO
     {
 
         private MySql.Data.MySqlClient.MySqlConnection conn;
@@ -18,7 +19,7 @@ namespace DAO
 
 
 
-        public UserDAO ()
+        public ItemDAO()
         {
             try
             {
@@ -27,7 +28,8 @@ namespace DAO
                 conn.Open();
                 Console.WriteLine(conn);
 
-            } catch (MySqlException ex)
+            }
+            catch (MySqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -35,7 +37,7 @@ namespace DAO
 
         }
 
-        public void closeConnection ()
+        public void closeConnection()
         {
             try
             {
@@ -47,22 +49,22 @@ namespace DAO
             {
                 Console.WriteLine(ex.Message);
             }
-           
+
         }
 
-        public User getUser(int id)
+        public Item getItem(int id)
         {
-            Console.WriteLine("Getting User at: " + id);
-            return new User();
+            Console.WriteLine("Getting Item at: " + id);
+            return new Item();
         }
 
-        public List<User> getUsers()
+        public List<Item> getItems()
         {
 
-            List<User> users = new List<User>();
+            List<Item> items = new List<Item>();
 
             //1: create query
-            String query = "SELECT * FROM user";
+            String query = "SELECT * FROM item";
 
             //2: create command
             MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -70,28 +72,28 @@ namespace DAO
             //3:Create reader and execute
             MySqlDataReader dataReader = cmd.ExecuteReader();
 
-            User tempUser;
+            Item tempItem;
 
             //Cycle thru each user 
             while (dataReader.Read())
             {
                 //create and set values for each user
-                tempUser = new User();
+                tempItem = new Item();
                 Console.WriteLine(dataReader["id"].GetType());
-                tempUser.setId((UInt32)dataReader["id"]);
-                tempUser.setName((String)dataReader["name"]);
-                tempUser.setAddress((String)dataReader["address"]);
-                tempUser.setPhoneNumber((String)dataReader["phone_number"]);
-                //Console.WriteLine(dataReader["standard_profit_margin"].GetType());
+                tempItem.setId((UInt32)dataReader["id"]);
+                tempItem.setName((String)dataReader["name"]);
+                tempItem.setPrice((double)dataReader["price"]);
+                tempItem.setUnitOfMeasure((String)dataReader["unit_of_measure"]);
+                tempItem.setStandProfMargin((double)dataReader["standard_profit_margin"]);
 
                 //add user to list
-                users.Add(tempUser);
+                items.Add(tempItem);
             }
 
 
-            Console.WriteLine("Getting All Users...");
-   
-            return users;
+            Console.WriteLine("Getting All Items...");
+
+            return items;
         }
 
     }

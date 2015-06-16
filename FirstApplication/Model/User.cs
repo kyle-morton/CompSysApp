@@ -12,20 +12,18 @@ namespace Model
         private String name;
         private String address;
         private String phoneNumber;
-        private Decimal standardProfitMargin;
 
         public User ()
         {
 
         }
 
-        public User (UInt32 id, String name, String address, String phoneNumber, Decimal standardProfitMargin)
+        public User (UInt32 id, String name, String address, String phoneNumber)
         {
             this.id = id;
             this.name = name;
             this.address = address;
             this.phoneNumber = phoneNumber;
-            this.standardProfitMargin = standardProfitMargin;
         }
 
         public UInt32 getId() { return id; }
@@ -39,9 +37,6 @@ namespace Model
 
         public String getPhoneNumber() { return phoneNumber; }
         public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
-
-        public Decimal getStandardProfitMargin() { return standardProfitMargin; }
-        public void setStandardProfitMargin(Decimal spm) { this.standardProfitMargin = spm; }
 
         //override toString() for use in ComboBox
         public override string ToString()
