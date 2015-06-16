@@ -1,0 +1,33 @@
+Specifications
+
+Language - C#
+Databse - SQL Server or MySQL
+
+Application Type - Windows Form
+
+1. Sales Transaction Form
+	Fields Needed: 
+		A)Customer Name - select from dropdown
+				when selected populate
+					Customer Number
+					Address
+					Phone #
+
+					
+		B)Line Items List Table
+			Item Number - select from dropdown
+				      when selected populate
+				      Item Unit Cost
+
+			Qty 
+ 
+			Line Item Sale Price -Calculate Sales Price based on Item Unit Cost and Customer standard profit margin
+
+			Extended Line Item Total
+
+		C)Total Sales Price
+		D)Total Sales Cost
+
+		
+2. Upload to Github and email URL with Schema outline
+

@@ -48,6 +48,15 @@ namespace FirstApplication
             Console.WriteLine("Selected user: " + selectedUser);
         }
 
+        private void exit (Object o, EventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
+
+        public void initList ()
+        {
+            users = userDAO.getUsers();
+        }
 
         #region Windows Form Designer generated code
 
@@ -57,7 +66,8 @@ namespace FirstApplication
         /// </summary>
         private void InitializeComponent()
         {
-            users = userDAO.getUsers();
+
+            initList();
 
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -65,7 +75,7 @@ namespace FirstApplication
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,7 +137,7 @@ namespace FirstApplication
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.exitBtn});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -135,20 +145,21 @@ namespace FirstApplication
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
-            // exitToolStripMenuItem
+            // exitBtn
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitBtn.Name = "exitBtn";
+            this.exitBtn.Size = new System.Drawing.Size(152, 22);
+            this.exitBtn.Text = "Exit";
+            this.exitBtn.Click += new EventHandler(exit);
             // 
             // editToolStripMenuItem
             // 
@@ -373,7 +384,7 @@ namespace FirstApplication
         private System.Windows.Forms.ComboBox customerDropdownBox;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitBtn;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button getCustomerBtn;
         private System.Windows.Forms.Label custNumberLabel;
