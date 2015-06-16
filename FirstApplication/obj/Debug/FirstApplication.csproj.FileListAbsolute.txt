@@ -1,0 +1,10 @@
+c:\users\kyle\documents\visual studio 2015\Projects\FirstApplication\FirstApplication\bin\Debug\FirstApplication.exe.config
+c:\users\kyle\documents\visual studio 2015\Projects\FirstApplication\FirstApplication\bin\Debug\FirstApplication.exe
+c:\users\kyle\documents\visual studio 2015\Projects\FirstApplication\FirstApplication\bin\Debug\FirstApplication.pdb
+c:\users\kyle\documents\visual studio 2015\Projects\FirstApplication\FirstApplication\obj\Debug\FirstApplication.csprojResolveAssemblyReference.cache
+c:\users\kyle\documents\visual studio 2015\Projects\FirstApplication\FirstApplication\obj\Debug\FirstApplication.Form1.resources
+c:\users\kyle\documents\visual studio 2015\Projects\FirstApplication\FirstApplication\obj\Debug\FirstApplication.Properties.Resources.resources
+c:\users\kyle\documents\visual studio 2015\Projects\FirstApplication\FirstApplication\obj\Debug\FirstApplication.csproj.GenerateResource.Cache
+c:\users\kyle\documents\visual studio 2015\Projects\FirstApplication\FirstApplication\obj\Debug\FirstApplication.exe
+c:\users\kyle\documents\visual studio 2015\Projects\FirstApplication\FirstApplication\obj\Debug\FirstApplication.pdb
+c:\users\kyle\documents\visual studio 2015\Projects\FirstApplication\FirstApplication\bin\Debug\MySql.Data.dll
