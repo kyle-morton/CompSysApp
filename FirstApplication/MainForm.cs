@@ -29,6 +29,7 @@ namespace FirstApplication
 
         private void exit(Object o, EventArgs e)
         {
+            itemDAO.closeConnection();
             userDAO.closeConnection();
             System.Environment.Exit(0);
         }
@@ -44,7 +45,7 @@ namespace FirstApplication
         {
             initList();
             InitializeComponent();
-            Console.WriteLine("Initializing Database Connection...");
+            Console.WriteLine("Initializing app...");
             
         }
 
@@ -64,6 +65,11 @@ namespace FirstApplication
         }
 
         private void custNumberLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
