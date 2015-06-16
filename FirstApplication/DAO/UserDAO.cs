@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Model;
 using MySql.Data.MySqlClient;
 
-namespace DAO
+namespace FirstApplication.DAO
 {
-    class UserDAO
+    class UserDAO : DAO
     {
 
-        private MySql.Data.MySqlClient.MySqlConnection conn;
+      //  private MySql.Data.MySqlClient.MySqlConnection conn;
         private const String myConnectionString = "server=localhost;uid=root;" +
         "pwd=root;database=compsysschema;";
 
@@ -35,6 +35,7 @@ namespace DAO
 
         }
 
+        /*
         public void closeConnection ()
         {
             try
@@ -49,6 +50,7 @@ namespace DAO
             }
            
         }
+        */
 
         public User getUser(int id)
         {

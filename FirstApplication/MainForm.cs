@@ -1,5 +1,4 @@
-﻿using DAO;
-using FirstApplication.DAO;
+﻿using FirstApplication.DAO;
 using FirstApplication.Model;
 using Model;
 using System;
@@ -20,6 +19,7 @@ namespace FirstApplication
         //get DAOs
         private UserDAO userDAO = new UserDAO();
         private ItemDAO itemDAO = new ItemDAO();
+        private OrderDAO orderDAO = new OrderDAO();
 
         private List<User> users;
         private List<Item> items;
@@ -36,12 +36,7 @@ namespace FirstApplication
         //Current Order
         private Order currentOrder = new Order();
 
-        private void exit(Object o, EventArgs e)
-        {
-            itemDAO.closeConnection();
-            userDAO.closeConnection();
-            System.Environment.Exit(0);
-        }
+       
 
         private void initList()
         {
@@ -62,18 +57,12 @@ namespace FirstApplication
             itemTable.Columns.Add("Line Item Sale Price", typeof(String));
             itemTable.Columns.Add("Extended Line Item Total", typeof(String));
 
-            // Here we add five DataRows.
-            /*
-            table.Rows.Add(25, "Indocin", "David", DateTime.Now);
-            table.Rows.Add(50, "Enebrel", "Sam", DateTime.Now);
-            table.Rows.Add(10, "Hydralazine", "Christoff", DateTime.Now);
-            table.Rows.Add(21, "Combivent", "Janet", DateTime.Now);
-            table.Rows.Add(100, "Dilantin", "Melanie", DateTime.Now);
-            */
-
             Console.WriteLine("Data Table: " + itemDataTable);
             
             itemDataTable.DataSource = itemTable;
+
+            this.totalSalesCostTextBox.Text = currentOrder.getTotalCostStr();
+            this.totalSalesPriceTextBox.Text = currentOrder.getTotalPriceStr();
         }
 
 
@@ -99,6 +88,10 @@ namespace FirstApplication
                 this.custAddrTextBox.Text = selectedUser.getAddress();
                 this.custPhoneTextBox.Text = selectedUser.getPhoneNumber();
                 Console.WriteLine("Selected user: " + selectedUser);
+
+                //Set customerId for order to be placed
+                currentOrder.setCustomerId(selectedUser.getId());
+                Console.WriteLine("Current order : " + currentOrder.getCustomerId());
             }
            
         }
@@ -117,20 +110,111 @@ namespace FirstApplication
                 //Add to backend list of items for current order
                 selectedItems.Add(selectedItem);
 
+                //Update Order Total Price/Cost
+                currentOrder.setTotalPrice(currentOrder.getTotalPrice() + lineItemSalePrice);
+                currentOrder.setTotalCost(currentOrder.getTotalCost() +
+                        (selectedItem.getPrice() * selectedItem.getStandProfitMargin()));
+
                 //Format values displayed on screen
                 String salePriceStr = String.Format("{0:C}", lineItemSalePrice);
 
                 //add to table
                 itemTable.Rows.Add(selectedItem.getName(), selectedItem.getUnitOfMeasure(),
                                 1, salePriceStr, salePriceStr);
+
+                this.totalSalesCostTextBox.Text = currentOrder.getTotalCostStr();
+                this.totalSalesPriceTextBox.Text = currentOrder.getTotalPriceStr();
+
+                //Enable buttons
+                this.resetBtn.Enabled = true;
+                this.placeOrderButton.Enabled = true;
+
             }
+
             
+
+        }
+        
+        //Place Current Order through the OrderDAO
+        private void placeOrder (Object o, EventArgs e)
+        {
+            Console.WriteLine("Placing Order...");
+
+            //Place Order via DAO
+            orderDAO.placeOrder(currentOrder, selectedItems);
+
+            clearCart(new Object(), new EventArgs());
+
+        }
+
+        private void clearCart (Object o, EventArgs e)
+        {
+            Console.WriteLine("Clearing Cart...");
+
+            //Reset Order
+            currentOrder = new Order();
+
+            this.totalSalesCostTextBox.Text = currentOrder.getTotalCostStr();
+            this.totalSalesPriceTextBox.Text = currentOrder.getTotalPriceStr();
+
+            //Reset Selected Items List
+            selectedItems.Clear();
+
+            //Delete Rows From Table
+            itemTable.Rows.Clear();
+
+            //Reset buttons
+            this.resetBtn.Enabled = false;
+            this.placeOrderButton.Enabled = false;
+        }
+
+        private void reset(Object o, EventArgs e)
+        {
+            Console.WriteLine("Reseting Fields...");
+
+            //Reset Order
+            currentOrder = new Order();
+
+            this.totalSalesCostTextBox.Text = currentOrder.getTotalCostStr();
+            this.totalSalesPriceTextBox.Text = currentOrder.getTotalPriceStr();
+
+            //Reset Selected Items List
+            selectedItems.Clear();
+
+            //Delete Rows From Table
+            itemTable.Rows.Clear();
+
+            //Reset user fiels
+            selectedUser = null;
+            this.custNumTextBox.Text = "";
+            this.custNameTBox.Text = "";
+            this.custAddrTextBox.Text = "";
+            this.custPhoneTextBox.Text = "";
+
+            //Reset buttons
+            this.resetBtn.Enabled = false;
+            this.placeOrderButton.Enabled = false;
+
+        }
+
+        private void exit(Object o, EventArgs e)
+        {
+            Console.WriteLine("Closing All Connections..");
+            itemDAO.closeConnection();
+            userDAO.closeConnection();
+            orderDAO.closeConnection();
+            System.Environment.Exit(0);
         }
 
         private void setClickEvents ()
         {
             this.exitBtn.Click += new System.EventHandler(this.exit);
             this.addItemBtn.Click += new System.EventHandler(this.addItem);
+            this.resetBtn.Click += new System.EventHandler(this.clearCart);
+            this.resetBtn.Enabled = false;
+            this.placeOrderButton.Click += new System.EventHandler(this.placeOrder);
+            this.placeOrderButton.Enabled = false;
+            this.newMenuItem.Click += new System.EventHandler(this.reset);
         }
 
 
@@ -139,24 +223,5 @@ namespace FirstApplication
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void custNumberLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

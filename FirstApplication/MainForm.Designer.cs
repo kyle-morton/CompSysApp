@@ -1,5 +1,5 @@
 ﻿using Model;
-using DAO;
+using FirstApplication.DAO;
 using System.Collections.Generic;
 using System;
 using System.Windows.Forms;
@@ -38,10 +38,10 @@ namespace FirstApplication
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +49,6 @@ namespace FirstApplication
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.additionalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.custDropdownLabel = new System.Windows.Forms.Label();
@@ -67,8 +66,16 @@ namespace FirstApplication
             this.label1 = new System.Windows.Forms.Label();
             this.itemDropDownBox = new System.Windows.Forms.ComboBox();
             this.addItemBtn = new System.Windows.Forms.Button();
+            this.totalSalesPriceTextBox = new System.Windows.Forms.TextBox();
+            this.totalSalesCostTextBox = new System.Windows.Forms.TextBox();
+            this.totalSalesPriceLabel = new System.Windows.Forms.Label();
+            this.totalSalesCostLabel = new System.Windows.Forms.Label();
+            this.placeOrderButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.resetBtn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemDataTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -85,38 +92,30 @@ namespace FirstApplication
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1015, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(827, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
-            this.openToolStripMenuItem,
+            this.newMenuItem,
             this.exitBtn});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // newToolStripMenuItem
+            // newMenuItem
             // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.newToolStripMenuItem.Text = "New";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.newMenuItem.Name = "newMenuItem";
+            this.newMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newMenuItem.Text = "New";
             // 
             // exitBtn
             // 
             this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(103, 22);
+            this.exitBtn.Size = new System.Drawing.Size(152, 22);
             this.exitBtn.Text = "Exit";
-            
             // 
             // editToolStripMenuItem
             // 
@@ -150,17 +149,9 @@ namespace FirstApplication
             // 
             // helpToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = "About";
             // 
             // debugToolStripMenuItem
             // 
@@ -210,7 +201,6 @@ namespace FirstApplication
             this.custNumberLabel.Size = new System.Drawing.Size(106, 13);
             this.custNumberLabel.TabIndex = 6;
             this.custNumberLabel.Text = "Customer Number";
-            this.custNumberLabel.Click += new System.EventHandler(this.custNumberLabel_Click);
             // 
             // custNameLabel
             // 
@@ -309,11 +299,79 @@ namespace FirstApplication
             this.addItemBtn.Text = "Add To Order";
             this.addItemBtn.UseVisualStyleBackColor = true;
             // 
+            // totalSalesPriceTextBox
+            // 
+            this.totalSalesPriceTextBox.Location = new System.Drawing.Point(702, 244);
+            this.totalSalesPriceTextBox.Name = "totalSalesPriceTextBox";
+            this.totalSalesPriceTextBox.ReadOnly = true;
+            this.totalSalesPriceTextBox.Size = new System.Drawing.Size(100, 20);
+            this.totalSalesPriceTextBox.TabIndex = 19;
+            // 
+            // totalSalesCostTextBox
+            // 
+            this.totalSalesCostTextBox.Location = new System.Drawing.Point(702, 218);
+            this.totalSalesCostTextBox.Name = "totalSalesCostTextBox";
+            this.totalSalesCostTextBox.ReadOnly = true;
+            this.totalSalesCostTextBox.Size = new System.Drawing.Size(100, 20);
+            this.totalSalesCostTextBox.TabIndex = 20;
+            // 
+            // totalSalesPriceLabel
+            // 
+            this.totalSalesPriceLabel.AutoSize = true;
+            this.totalSalesPriceLabel.Location = new System.Drawing.Point(593, 247);
+            this.totalSalesPriceLabel.Name = "totalSalesPriceLabel";
+            this.totalSalesPriceLabel.Size = new System.Drawing.Size(104, 13);
+            this.totalSalesPriceLabel.TabIndex = 22;
+            this.totalSalesPriceLabel.Text = "Total Sales Price";
+            // 
+            // totalSalesCostLabel
+            // 
+            this.totalSalesCostLabel.AutoSize = true;
+            this.totalSalesCostLabel.Location = new System.Drawing.Point(593, 222);
+            this.totalSalesCostLabel.Name = "totalSalesCostLabel";
+            this.totalSalesCostLabel.Size = new System.Drawing.Size(100, 13);
+            this.totalSalesCostLabel.TabIndex = 23;
+            this.totalSalesCostLabel.Text = "Total Sales Cost";
+            // 
+            // placeOrderButton
+            // 
+            this.placeOrderButton.Location = new System.Drawing.Point(652, 287);
+            this.placeOrderButton.Name = "placeOrderButton";
+            this.placeOrderButton.Size = new System.Drawing.Size(98, 23);
+            this.placeOrderButton.TabIndex = 24;
+            this.placeOrderButton.Text = "Place Order";
+            this.placeOrderButton.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(596, 40);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(180, 43);
+            this.pictureBox1.TabIndex = 25;
+            this.pictureBox1.TabStop = false;
+            // 
+            // resetBtn
+            // 
+            this.resetBtn.Location = new System.Drawing.Point(641, 167);
+            this.resetBtn.Name = "resetBtn";
+            this.resetBtn.Size = new System.Drawing.Size(120, 30);
+            this.resetBtn.TabIndex = 26;
+            this.resetBtn.Text = "Empty Cart";
+            this.resetBtn.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1015, 391);
+            this.ClientSize = new System.Drawing.Size(827, 352);
+            this.Controls.Add(this.resetBtn);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.placeOrderButton);
+            this.Controls.Add(this.totalSalesCostLabel);
+            this.Controls.Add(this.totalSalesPriceLabel);
+            this.Controls.Add(this.totalSalesCostTextBox);
+            this.Controls.Add(this.totalSalesPriceTextBox);
             this.Controls.Add(this.addItemBtn);
             this.Controls.Add(this.itemDropDownBox);
             this.Controls.Add(this.label1);
@@ -338,6 +396,7 @@ namespace FirstApplication
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemDataTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -356,10 +415,8 @@ namespace FirstApplication
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.Label custDropdownLabel;
         private System.Windows.Forms.ComboBox customerDropdownBox;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitBtn;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button getCustomerBtn;
         private System.Windows.Forms.Label custNumberLabel;
         private System.Windows.Forms.Label custNameLabel;
@@ -373,6 +430,13 @@ namespace FirstApplication
         private Label label1;
         private ComboBox itemDropDownBox;
         private Button addItemBtn;
+        private TextBox totalSalesPriceTextBox;
+        private TextBox totalSalesCostTextBox;
+        private Label totalSalesPriceLabel;
+        private Label totalSalesCostLabel;
+        private Button placeOrderButton;
+        private PictureBox pictureBox1;
+        private Button resetBtn;
     }
 }
 

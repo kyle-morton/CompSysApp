@@ -9,10 +9,10 @@ using FirstApplication.Model;
 
 namespace FirstApplication.DAO
 {
-    class ItemDAO
+    class ItemDAO : DAO
     {
 
-        private MySql.Data.MySqlClient.MySqlConnection conn;
+      //  private MySql.Data.MySqlClient.MySqlConnection conn;
         private const String myConnectionString = "server=localhost;uid=root;" +
         "pwd=root;database=compsysschema;";
 
@@ -37,6 +37,7 @@ namespace FirstApplication.DAO
 
         }
 
+        /*
         public void closeConnection()
         {
             try
@@ -51,6 +52,7 @@ namespace FirstApplication.DAO
             }
 
         }
+        */
 
         public Item getItem(int id)
         {

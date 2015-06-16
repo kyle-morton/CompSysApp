@@ -11,10 +11,15 @@ namespace FirstApplication.Model
         private UInt32 id;
         private UInt32 customerId;
         private decimal totalPrice;
-        private DateTime date;
+        private decimal totalCost;
+        private String totalPriceStr;
+        private String totalSaleCost;
 
         public Order ()
-        { 
+        {
+            totalPrice = 0;
+            totalCost = 0;
+
         }
 
         public UInt32 getId () { return this.id; }
@@ -26,8 +31,18 @@ namespace FirstApplication.Model
         public decimal getTotalPrice () { return this.totalPrice; }
         public void setTotalPrice (decimal totalPrice) { this.totalPrice = totalPrice; }
 
-        public DateTime getDate () { return this.date; }
-        public void setDate (DateTime date) { this.date = date; }
+        public decimal getTotalCost() { return this.totalCost; }
+        public void setTotalCost(decimal totalCost) { this.totalCost = totalCost; }
+
+        public String getTotalPriceStr ()
+        {
+            return String.Format("{0:C}", totalPrice);
+        }
+
+        public String getTotalCostStr ()
+        {
+            return String.Format("{0:C}", totalCost);
+        }
 
 
     }
