@@ -10,7 +10,7 @@ namespace FirstApplication.Model
     {
         private UInt32 id;
         private UInt32 customerId;
-        private double totalPrice;
+        private decimal totalPrice;
         private DateTime date;
 
         public Order ()
@@ -23,8 +23,8 @@ namespace FirstApplication.Model
         public UInt32 getCustomerId() { return this.customerId; }
         public void setCustomerId (UInt32 customerId) { this.customerId = customerId; }
 
-        public double getTotalPrice () { return this.totalPrice; }
-        public void setTotalPrice (double totalPrice) { this.totalPrice = totalPrice; }
+        public decimal getTotalPrice () { return this.totalPrice; }
+        public void setTotalPrice (decimal totalPrice) { this.totalPrice = totalPrice; }
 
         public DateTime getDate () { return this.date; }
         public void setDate (DateTime date) { this.date = date; }

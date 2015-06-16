@@ -26,17 +26,7 @@ namespace FirstApplication
             base.Dispose(disposing);
         }
 
-    
-        private void getSelectedUser(Object o, EventArgs e)
-        {
-            // this.customerDropdownBox.SelectedIndex = user;
-            this.selectedUser = users[this.customerDropdownBox.SelectedIndex];
-            this.custNumTextBox.Text = selectedUser.getId().ToString();
-            this.custNameTBox.Text = selectedUser.getName();
-            this.custAddrTextBox.Text = selectedUser.getAddress();
-            this.custPhoneTextBox.Text = selectedUser.getPhoneNumber();
-            Console.WriteLine("Selected user: " + selectedUser);
-        }
+   
 
 
         #region Windows Form Designer generated code
@@ -73,8 +63,12 @@ namespace FirstApplication
             this.custPhoneNumberLabel = new System.Windows.Forms.Label();
             this.custAddrTextBox = new System.Windows.Forms.TextBox();
             this.custPhoneTextBox = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.itemDataTable = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.itemDropDownBox = new System.Windows.Forms.ComboBox();
+            this.addItemBtn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemDataTable)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -122,7 +116,7 @@ namespace FirstApplication
             this.exitBtn.Name = "exitBtn";
             this.exitBtn.Size = new System.Drawing.Size(103, 22);
             this.exitBtn.Text = "Exit";
-            this.exitBtn.Click += new System.EventHandler(this.exit);
+            
             // 
             // editToolStripMenuItem
             // 
@@ -280,37 +274,50 @@ namespace FirstApplication
             this.custPhoneTextBox.Size = new System.Drawing.Size(116, 20);
             this.custPhoneTextBox.TabIndex = 14;
             // 
-            // tableLayoutPanel1
+            // itemDataTable
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.91045F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.08955F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(22, 135);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 9;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 162);
-            this.tableLayoutPanel1.TabIndex = 15;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            this.itemDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.itemDataTable.Location = new System.Drawing.Point(22, 204);
+            this.itemDataTable.Name = "itemDataTable";
+            this.itemDataTable.Size = new System.Drawing.Size(531, 129);
+            this.itemDataTable.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(22, 170);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 16);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Line Items";
+            // 
+            // itemDropDownBox
+            // 
+            this.itemDropDownBox.FormattingEnabled = true;
+            this.itemDropDownBox.Location = new System.Drawing.Point(111, 170);
+            this.itemDropDownBox.Name = "itemDropDownBox";
+            this.itemDropDownBox.Size = new System.Drawing.Size(212, 21);
+            this.itemDropDownBox.TabIndex = 17;
+            // 
+            // addItemBtn
+            // 
+            this.addItemBtn.Location = new System.Drawing.Point(350, 167);
+            this.addItemBtn.Name = "addItemBtn";
+            this.addItemBtn.Size = new System.Drawing.Size(100, 23);
+            this.addItemBtn.TabIndex = 18;
+            this.addItemBtn.Text = "Add To Order";
+            this.addItemBtn.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1015, 391);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.addItemBtn);
+            this.Controls.Add(this.itemDropDownBox);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.itemDataTable);
             this.Controls.Add(this.custPhoneTextBox);
             this.Controls.Add(this.custAddrTextBox);
             this.Controls.Add(this.custPhoneNumberLabel);
@@ -330,6 +337,7 @@ namespace FirstApplication
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemDataTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -361,7 +369,10 @@ namespace FirstApplication
         private Label custPhoneNumberLabel;
         private TextBox custAddrTextBox;
         private TextBox custPhoneTextBox;
-        private TableLayoutPanel tableLayoutPanel1;
+        private DataGridView itemDataTable;
+        private Label label1;
+        private ComboBox itemDropDownBox;
+        private Button addItemBtn;
     }
 }
 

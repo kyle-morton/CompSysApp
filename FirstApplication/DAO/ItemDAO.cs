@@ -82,9 +82,9 @@ namespace FirstApplication.DAO
                 Console.WriteLine(dataReader["id"].GetType());
                 tempItem.setId((UInt32)dataReader["id"]);
                 tempItem.setName((String)dataReader["name"]);
-                tempItem.setPrice((double)dataReader["price"]);
+                tempItem.setPrice((decimal)dataReader["price"]);
                 tempItem.setUnitOfMeasure((String)dataReader["unit_of_measure"]);
-                tempItem.setStandProfMargin((double)dataReader["standard_profit_margin"]);
+                tempItem.setStandProfMargin((decimal)dataReader["standard_profit_margin"]);
 
                 //add user to list
                 items.Add(tempItem);

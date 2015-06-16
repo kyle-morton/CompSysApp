@@ -10,9 +10,9 @@ namespace FirstApplication.Model
     {
         private UInt32 id;
         private String name;
-        private double price;
+        private decimal price;
         private String unitOfMeasure;
-        private double standProfMargin;
+        private decimal standProfMargin;
 
         public UInt32 getId() { return this.id; }
         public void setId(UInt32 id) { this.id = id; }
@@ -20,14 +20,20 @@ namespace FirstApplication.Model
         public String getName () { return this.name; }
         public void setName(String name) { this.name = name; }
 
-        public double getPrice () { return this.price; }
-        public void setPrice (double price) { this.price = price; }
+        public decimal getPrice () { return this.price; }
+        public void setPrice (decimal price) { this.price = price; }
 
         public String getUnitOfMeasure () { return this.unitOfMeasure; }
         public void setUnitOfMeasure (String unitOfMeasure) { this.unitOfMeasure = unitOfMeasure; }
 
-        public double getStandProfitMargin () { return this.standProfMargin; }
-        public void setStandProfMargin(double sPM) { this.standProfMargin = sPM; }
+        public decimal getStandProfitMargin () { return this.standProfMargin; }
+        public void setStandProfMargin(decimal sPM) { this.standProfMargin = sPM; }
+
+        //override toString() for use in ComboBox
+        public override string ToString()
+        {
+            return this.name + " $" + this.price;
+        }
 
     }
 }
