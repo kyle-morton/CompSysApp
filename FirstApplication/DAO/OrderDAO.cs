@@ -16,10 +16,6 @@ namespace FirstApplication.DAO
         private const String myConnectionString = "server=localhost;uid=root;" +
         "pwd=root;database=compsysschema;";
 
-
-
-
-
         public OrderDAO()
         {
             try
@@ -57,8 +53,6 @@ namespace FirstApplication.DAO
                 {
                     insertOrderItem(items[i], id);
                 }
-
-
             } else
             {
                 success = false;

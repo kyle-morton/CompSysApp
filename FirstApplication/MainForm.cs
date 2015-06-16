@@ -140,10 +140,24 @@ namespace FirstApplication
         {
             Console.WriteLine("Placing Order...");
 
-            //Place Order via DAO
-            orderDAO.placeOrder(currentOrder, selectedItems);
+            //Don't allow order placement unless user selected
+            if (selectedUser.getId() == 0)
+            {
+                MessageBox.Show("Please Select a Customer Before Placing Order", "Alert",
+                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            } else
+            {
+                //Place Order via DAO
+                bool success = orderDAO.placeOrder(currentOrder, selectedItems);
+                if (success)
+                {
+                    MessageBox.Show("Order Placed Successfully", "Order Update",
+                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
 
-            clearCart(new Object(), new EventArgs());
+                clearCart(new Object(), new EventArgs());
+            }
+            
 
         }
 
@@ -185,7 +199,7 @@ namespace FirstApplication
             itemTable.Rows.Clear();
 
             //Reset user fiels
-            selectedUser = null;
+            selectedUser = new User();
             this.custNumTextBox.Text = "";
             this.custNameTBox.Text = "";
             this.custAddrTextBox.Text = "";
