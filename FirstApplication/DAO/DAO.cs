@@ -9,10 +9,12 @@ using FirstApplication.Model;
 
 namespace FirstApplication.DAO
 {
-    class DAO
+    class DAO 
     {
 
         public MySql.Data.MySqlClient.MySqlConnection conn;
+        private const String CONNECTION_STRING = "server=localhost;uid=root;" +
+        "pwd=root;database=compsysschema;";
 
         public void closeConnection()
         {
@@ -27,6 +29,11 @@ namespace FirstApplication.DAO
                 Console.WriteLine(ex.Message);
             }
 
+        }
+
+        public String getConnString ()
+        {
+            return CONNECTION_STRING;
         }
 
     }

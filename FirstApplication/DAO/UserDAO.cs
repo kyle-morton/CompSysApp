@@ -12,8 +12,8 @@ namespace FirstApplication.DAO
     {
 
       //  private MySql.Data.MySqlClient.MySqlConnection conn;
-        private const String myConnectionString = "server=localhost;uid=root;" +
-        "pwd=root;database=compsysschema;";
+      //  private const String myConnectionString = "server=localhost;uid=root;" +
+     //   "pwd=root;database=compsysschema;";
 
 
 
@@ -23,7 +23,7 @@ namespace FirstApplication.DAO
             try
             {
                 conn = new MySql.Data.MySqlClient.MySqlConnection();
-                conn.ConnectionString = myConnectionString;
+                conn.ConnectionString = getConnString();
                 conn.Open();
                 Console.WriteLine(conn);
 
@@ -63,38 +63,44 @@ namespace FirstApplication.DAO
 
             List<User> users = new List<User>();
 
-            //1: create query
-            String query = "SELECT * FROM user";
-
-            //2: create command
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-
-            //3:Create reader and execute
-            MySqlDataReader dataReader = cmd.ExecuteReader();
-
-            User tempUser;
-
-            //Cycle thru each user 
-            while (dataReader.Read())
+            try
             {
-                //create and set values for each user
-                tempUser = new User();
-                Console.WriteLine(dataReader["id"].GetType());
-                tempUser.setId((UInt32)dataReader["id"]);
-                tempUser.setName((String)dataReader["name"]);
-                tempUser.setAddress((String)dataReader["address"]);
-                tempUser.setPhoneNumber((String)dataReader["phone_number"]);
-                //Console.WriteLine(dataReader["standard_profit_margin"].GetType());
+                //1: create query
+                String query = "SELECT * FROM user";
 
-                //add user to list
-                users.Add(tempUser);
+                //2: create command
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                //3:Create reader and execute
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                User tempUser;
+
+                //Cycle thru each user 
+                while (dataReader.Read())
+                {
+                    //create and set values for each user
+                    tempUser = new User();
+                    Console.WriteLine(dataReader["id"].GetType());
+                    tempUser.setId((UInt32)dataReader["id"]);
+                    tempUser.setName((String)dataReader["name"]);
+                    tempUser.setAddress((String)dataReader["address"]);
+                    tempUser.setPhoneNumber((String)dataReader["phone_number"]);
+                    //Console.WriteLine(dataReader["standard_profit_margin"].GetType());
+
+                    //add user to list
+                    users.Add(tempUser);
+                }
             }
-
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e);
+            }
 
             Console.WriteLine("Getting All Users...");
    
             return users;
         }
-
+         
     }
 }

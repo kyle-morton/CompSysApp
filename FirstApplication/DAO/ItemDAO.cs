@@ -13,8 +13,8 @@ namespace FirstApplication.DAO
     {
 
       //  private MySql.Data.MySqlClient.MySqlConnection conn;
-        private const String myConnectionString = "server=localhost;uid=root;" +
-        "pwd=root;database=compsysschema;";
+       // private const String myConnectionString = "server=localhost;uid=root;" +
+       // "pwd=root;database=compsysschema;";
 
 
 
@@ -24,7 +24,7 @@ namespace FirstApplication.DAO
             try
             {
                 conn = new MySql.Data.MySqlClient.MySqlConnection();
-                conn.ConnectionString = myConnectionString;
+                conn.ConnectionString = getConnString();
                 conn.Open();
                 Console.WriteLine(conn);
 
@@ -62,36 +62,41 @@ namespace FirstApplication.DAO
 
         public List<Item> getItems()
         {
-
             List<Item> items = new List<Item>();
 
-            //1: create query
-            String query = "SELECT * FROM item";
-
-            //2: create command
-            MySqlCommand cmd = new MySqlCommand(query, conn);
-
-            //3:Create reader and execute
-            MySqlDataReader dataReader = cmd.ExecuteReader();
-
-            Item tempItem;
-
-            //Cycle thru each user 
-            while (dataReader.Read())
+            try
             {
-                //create and set values for each user
-                tempItem = new Item();
-                Console.WriteLine(dataReader["id"].GetType());
-                tempItem.setId((UInt32)dataReader["id"]);
-                tempItem.setName((String)dataReader["name"]);
-                tempItem.setPrice((decimal)dataReader["price"]);
-                tempItem.setUnitOfMeasure((String)dataReader["unit_of_measure"]);
-                tempItem.setStandProfMargin((decimal)dataReader["standard_profit_margin"]);
+                //1: create query
+                String query = "SELECT * FROM item";
 
-                //add user to list
-                items.Add(tempItem);
+                //2: create command
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                //3:Create reader and execute
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                Item tempItem;
+
+                //Cycle thru each user 
+                while (dataReader.Read())
+                {
+                    //create and set values for each user
+                    tempItem = new Item();
+                    Console.WriteLine(dataReader["id"].GetType());
+                    tempItem.setId((UInt32)dataReader["id"]);
+                    tempItem.setName((String)dataReader["name"]);
+                    tempItem.setPrice((decimal)dataReader["price"]);
+                    tempItem.setUnitOfMeasure((String)dataReader["unit_of_measure"]);
+                    tempItem.setStandProfMargin((decimal)dataReader["standard_profit_margin"]);
+
+                    //add user to list
+                    items.Add(tempItem);
+                }
             }
-
+            catch (MySqlException e)
+            {
+                Console.WriteLine(e);
+            }
 
             Console.WriteLine("Getting All Items...");
 
